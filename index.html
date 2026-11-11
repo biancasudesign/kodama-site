@@ -70,7 +70,9 @@ h1{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;margin:0 0 18px;font-weig
 .sticker{position:absolute;z-index:3;left:calc(46% - 70px);bottom:12%;width:250px;background:var(--accent);color:var(--on-accent);border-radius:46% 54% 52% 48% / 55% 45% 55% 45%;padding:34px 26px;text-align:center;transform:rotate(-4deg);line-height:1.3;box-shadow:0 10px 30px rgba(42,36,32,.18)}
 .sticker small{display:block;font-weight:600;font-size:.95rem}
 .sticker strong{display:block;font-size:1.6rem;font-weight:600;margin:6px 0 4px;line-height:1.15}
-.sticker span{font-weight:600}
+.sticker span{display:block;font-weight:600}
+.sticker .where{margin-top:8px;font-size:.95rem;line-height:1.3}
+.sticker .where b{font-weight:800}
 .sticker a{display:inline-block;margin-top:10px;font-weight:800}
 
 /* tablet and phone: photo on top, wavy bottom edge, sticker overlapping it */
@@ -82,7 +84,8 @@ h1{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;margin:0 0 18px;font-weig
   .hero .wrap{width:100%;min-height:0;padding-top:28px;padding-bottom:48px;display:block}
   .hero-text{width:auto}
   .hero-media{order:1}.sticker{order:2}.hero .wrap{order:3}
-  .sticker{position:relative;left:auto;bottom:auto;width:178px;padding:20px 14px;margin:-104px 0 0 16px;align-self:flex-start}
+  .sticker{position:relative;left:auto;bottom:auto;width:200px;padding:22px 16px;margin:-104px 0 0 16px;align-self:flex-start}
+  .sticker .where{font-size:.88rem}
   .sticker small{font-size:.85rem}
   .sticker strong{font-size:1.2rem}
   .slide-controls{right:12px;bottom:10%}
@@ -143,7 +146,6 @@ input,textarea{font:inherit;color:inherit;background:#fff;border:2px solid var(-
 input:focus,textarea:focus{border-color:var(--accent);outline:none}
 textarea{min-height:140px;resize:vertical}
 .trap{position:absolute;left:-9999px}
-.direct{margin-top:20px;color:var(--muted)}
 
 footer{border-top:1px solid var(--line);padding:30px 0 40px;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
@@ -285,7 +287,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-betw
       <input class="trap" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div><button class="btn" type="submit">Send message</button></div>
     </form>
-    <p class="direct">Prefer email? <a href="mailto:hello@kodamawood.ca">hello@kodamawood.ca</a></p>
   </div>
 </section>
 
@@ -295,7 +296,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-betw
   <div class="wrap">
     <span>&copy; <span id="year">2026</span> Kodama Wood</span>
     <span>Instagram: <a href="https://instagram.com/YOURHANDLE">@yourhandle</a></span>
-    <span>Find us at markets together with <a href="https://mingsstudio.ca">Ming’s Studio</a></span>
+    <span>Find us at markets together with <a href="https://mingstudio.ca">Ming’s Studio</a></span>
   </div>
 </footer>
 
@@ -303,26 +304,43 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-betw
 /* ============================================================
    UPCOMING MARKETS: this is the only list you edit each time.
    Copy a line, change the details, save. Rules:
-   - date must be written YEAR-MONTH-DAY, like 2026-11-07
-   - leave link as "" if you have no link
-   - leave note as "" if you have nothing to add
-   - markets that have already happened hide themselves
+   - date: the first day, written YEAR-MONTH-DAY, like 2026-11-15
+   - end:  the last day if the market runs over several days,
+           or "" if it is a one-day market
+   - leave time, place, link or note as "" if you have nothing for them
+   - the top market also shows in the "Next market" bubble
+   - markets hide themselves once they are over
    ============================================================ */
 const MARKETS = [
-  { date: "2026-11-07", time: "10am to 4pm", name: "Market name", place: "Venue, Town", link: "https://example.com", note: "Both of us will be there." },
-  { date: "2026-11-21", time: "9am to 3pm",  name: "Another market name", place: "Venue, Town", link: "", note: "Bring cash or card, we take both." },
-  { date: "2026-12-05", time: "10am to 5pm", name: "Holiday market", place: "Venue, Town", link: "", note: "" }
+  { date: "2026-11-14", end: "2026-11-15", time: "10:30am to 5pm", name: "Artisans Westmount", place: "Victoria Hall", link: "", note: "$2 admission, or bring a non-perishable food item." },
+  { date: "2026-11-21", end: "2026-11-22", time: "", name: "Artisan market in Dorval", place: "", link: "", note: "Details to come." }
 ];
 
 /* ---- below here is the machinery; no need to touch ---- */
 (function () {
   var now = new Date();
-  var upcoming = MARKETS
-    .map(function (m) { m.when = new Date(m.date + "T23:59:59"); return m; })
-    .filter(function (m) { return m.when >= now; })
-    .sort(function (a, b) { return a.when - b.when; });
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  function day(s) { return new Date(s + "T12:00:00"); }
 
-  function fmt(d, opts) { return d.toLocaleDateString("en-CA", opts); }
+  var upcoming = MARKETS
+    .map(function (m) { m.from = day(m.date); m.to = m.end ? day(m.end) : m.from; return m; })
+    .filter(function (m) { return new Date((m.end || m.date) + "T23:59:59") >= now; })
+    .sort(function (a, b) { return a.from - b.from; });
+
+  /* "Nov 15", "Nov 15–16" or "Nov 30 – Dec 1" */
+  function dates(m) {
+    var a = m.from, b = m.to;
+    var s = MONTHS[a.getMonth()] + " " + a.getDate();
+    if (+a === +b) return s;
+    return a.getMonth() === b.getMonth() ? s + "–" + b.getDate() : s + " – " + MONTHS[b.getMonth()] + " " + b.getDate();
+  }
+  /* "Sat", "Sat & Sun" or "Fri–Sun" */
+  function days(m) {
+    var n = Math.round((m.to - m.from) / 864e5) + 1;
+    var a = DAYS[m.from.getDay()], b = DAYS[m.to.getDay()];
+    return n === 1 ? a : n === 2 ? a + " & " + b : a + "–" + b;
+  }
   function esc(s) { var t = document.createElement("div"); t.textContent = s; return t.innerHTML; }
 
   var sticker = document.getElementById("sticker");
@@ -330,17 +348,17 @@ const MARKETS = [
 
   if (upcoming.length) {
     var n = upcoming[0];
-    sticker.innerHTML = "<small>Next market</small><strong>" +
-      fmt(n.when, { weekday: "long", month: "long", day: "numeric" }) +
-      "</strong><span>" + esc(n.place) + "</span><br><a href=\"#markets\">All dates</a>";
+    sticker.innerHTML = "<small>Next market</small><strong>" + dates(n) + "</strong><span>" + days(n) + "</span>" +
+      "<span class=\"where\"><b>" + esc(n.name) + "</b>" + (n.place ? "<br>at " + esc(n.place) : "") + "</span>" +
+      "<a href=\"#markets\">All dates</a>";
 
     list.innerHTML = upcoming.map(function (m) {
       var title = m.link
         ? "<a href=\"" + esc(m.link) + "\" target=\"_blank\" rel=\"noopener\">" + esc(m.name) + "</a>"
         : esc(m.name);
-      return "<div class=\"market\"><div class=\"date\">" +
-        fmt(m.when, { weekday: "short", month: "short", day: "numeric" }) +
-        "<small>" + esc(m.time) + "</small></div><div><h3>" + title + "</h3><p>" + esc(m.place) + "</p>" +
+      return "<div class=\"market\"><div class=\"date\">" + dates(m) + "<small>" + days(m) + "</small>" +
+        (m.time ? "<small>" + esc(m.time) + "</small>" : "") + "</div><div><h3>" + title + "</h3>" +
+        (m.place ? "<p>" + esc(m.place) + "</p>" : "") +
         (m.note ? "<p class=\"note\">" + esc(m.note) + "</p>" : "") + "</div></div>";
     }).join("");
   }
