@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" href="images/logo-round.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Google+Sans:wght@500&family=Lexend+Deca:wght@300;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Google+Sans:wght@500&family=Lexend+Deca:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    STYLE SETTINGS: change these and the whole site follows.
@@ -27,14 +27,14 @@
   --ink: #2A2420;
   --muted: #6B6159;
   --line: #EDE6DA;
-  --font: "Lexend Deca", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;      /* body text (Light 300) */
+  --font: "Lexend Deca", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;      /* body text (Regular 400) */
   --font-head: "Fredoka", "Lexend Deca", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* headings and buttons (titles use Medium 500) */
   --font-logo: "Google Sans", "Lexend Deca", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* the name in the header */
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-weight:300;font-size:1.0625rem;line-height:1.65}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-weight:400;font-size:1.0625rem;line-height:1.65}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
@@ -211,7 +211,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-betw
        Photos get cropped to fit. To choose which part stays visible, change object-position:
        "50% 50%" is the centre, a bigger second number shows more of the bottom. -->
   <div class="hero-media" id="hero-media" aria-roledescription="carousel" aria-label="Photos of our work">
-    <img class="slide is-on" src="images/hero-1.jpeg" alt="Two hand-carved wooden spoons on a rustic wooden board, with scattered spices" fetchpriority="high" style="object-position:50% 50%">
+    <img class="slide is-on" src="images/hero-1.jpeg" alt="A hand holding a striped hardwood cutting board over a market table of wooden spreaders and boards" fetchpriority="high" style="object-position:50% 50%">
+    <img class="slide" src="images/hero-2.jpeg" alt="Two carved wooden spoons on a walnut board, with cardamom pods and spices" loading="lazy" style="object-position:50% 50%">
+    <img class="slide" src="images/hero-3.jpeg" alt="A wooden puzzle of a polar bear and cubs above blue painted waves with a seal and fish" loading="lazy" style="object-position:50% 50%">
     <div class="slide-controls" id="slide-controls"></div>
   </div>
 
@@ -242,14 +244,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-betw
       <!-- PHOTOS: 5 to 10 is best. To add one, copy a <figure> line and change the file name and alt text.
            To remove one, delete its line. The arrows and photo count update by themselves. -->
       <div class="gallery">
-        <figure class="ph"><img src="images/kitchen-1.jpg" alt="Describe photo 1" loading="lazy" onerror="this.remove()">Photo here: kitchen-1.jpg</figure>
-        <figure class="ph"><img src="images/kitchen-2.jpg" alt="Describe photo 2" loading="lazy" onerror="this.remove()">Photo here: kitchen-2.jpg</figure>
-        <figure class="ph"><img src="images/kitchen-3.jpg" alt="Describe photo 3" loading="lazy" onerror="this.remove()">Photo here: kitchen-3.jpg</figure>
-        <figure class="ph"><img src="images/kitchen-4.jpg" alt="Describe photo 4" loading="lazy" onerror="this.remove()">Photo here: kitchen-4.jpg</figure>
-        <figure class="ph"><img src="images/kitchen-5.jpg" alt="Describe photo 5" loading="lazy" onerror="this.remove()">Photo here: kitchen-5.jpg</figure>
-        <figure class="ph"><img src="images/kitchen-6.jpg" alt="Describe photo 6" loading="lazy" onerror="this.remove()">Photo here: kitchen-6.jpg</figure>
-        <figure class="ph"><img src="images/kitchen-7.jpg" alt="Describe photo 7" loading="lazy" onerror="this.remove()">Photo here: kitchen-7.jpg</figure>
-        <figure class="ph"><img src="images/kitchen-8.jpg" alt="Describe photo 8" loading="lazy" onerror="this.remove()">Photo here: kitchen-8.jpg</figure>
+        <figure class="ph"><img src="images/kitchen-1.jpeg" alt="Two hand-carved wooden spoons on a rustic wooden board, with scattered spices" loading="lazy" onerror="this.remove()">Photo here: kitchen-1.jpeg</figure>
+        <figure class="ph"><img src="images/kitchen-2.jpeg" alt="A wooden spreader resting on a teak board, with more spreaders below" loading="lazy" onerror="this.remove()">Photo here: kitchen-2.jpeg</figure>
+        <figure class="ph"><img src="images/kitchen-3.jpeg" alt="Two animal-shaped serving boards in two-tone wood, with cutlery, nuts and rosemary" loading="lazy" onerror="this.remove()">Photo here: kitchen-3.jpeg</figure>
+        <figure class="ph"><img src="images/kitchen-4.jpeg" alt="A striped cutting board with a wavy inlay of light and dark woods" loading="lazy" onerror="this.remove()">Photo here: kitchen-4.jpeg</figure>
+        <figure class="ph"><img src="images/kitchen-5.jpeg" alt="Three wooden butter knives and a spreader on a bread board, with butter and berries" loading="lazy" onerror="this.remove()">Photo here: kitchen-5.jpeg</figure>
+        <figure class="ph"><img src="images/kitchen-6.jpeg" alt="A set of carved wooden spoons, scoops and forks laid out on a linen cloth" loading="lazy" onerror="this.remove()">Photo here: kitchen-6.jpeg</figure>
       </div>
     </div>
 
@@ -258,12 +258,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-betw
       <!-- PHOTOS: 5 to 10 is best. To add one, copy a <figure> line and change the file name and alt text.
            To remove one, delete its line. The arrows and photo count update by themselves. -->
       <div class="gallery">
-        <figure class="ph"><img src="images/home-1.jpg" alt="Describe photo 1" loading="lazy" onerror="this.remove()">Photo here: home-1.jpg</figure>
-        <figure class="ph"><img src="images/home-2.jpg" alt="Describe photo 2" loading="lazy" onerror="this.remove()">Photo here: home-2.jpg</figure>
-        <figure class="ph"><img src="images/home-3.jpg" alt="Describe photo 3" loading="lazy" onerror="this.remove()">Photo here: home-3.jpg</figure>
-        <figure class="ph"><img src="images/home-4.jpg" alt="Describe photo 4" loading="lazy" onerror="this.remove()">Photo here: home-4.jpg</figure>
-        <figure class="ph"><img src="images/home-5.jpg" alt="Describe photo 5" loading="lazy" onerror="this.remove()">Photo here: home-5.jpg</figure>
-        <figure class="ph"><img src="images/home-6.jpg" alt="Describe photo 6" loading="lazy" onerror="this.remove()">Photo here: home-6.jpg</figure>
+        <figure class="ph"><img src="images/mobile-1.jpeg" alt="A hanging wooden bird mobile with long outstretched wings" loading="lazy" onerror="this.remove()">Photo here: mobile-1.jpeg</figure>
+        <figure class="ph"><img src="images/mobile-2.jpeg" alt="A hanging wooden bird mobile with blue-tipped wings" loading="lazy" onerror="this.remove()">Photo here: mobile-2.jpeg</figure>
+        <figure class="ph"><img src="images/mobile-3.jpeg" alt="A hanging wooden duck mobile in flight, with an orange beak" loading="lazy" onerror="this.remove()">Photo here: mobile-3.jpeg</figure>
+        <figure class="ph"><img src="images/mobile-4.jpeg" alt="A wooden whirligig of a person paddling a red canoe with yellow paddles, in a garden" loading="lazy" onerror="this.remove()">Photo here: mobile-4.jpeg</figure>
       </div>
     </div>
 
@@ -272,11 +270,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-betw
       <!-- PHOTOS: 5 to 10 is best. To add one, copy a <figure> line and change the file name and alt text.
            To remove one, delete its line. The arrows and photo count update by themselves. -->
       <div class="gallery">
-        <figure class="ph"><img src="images/gifts-1.jpg" alt="Describe photo 1" loading="lazy" onerror="this.remove()">Photo here: gifts-1.jpg</figure>
-        <figure class="ph"><img src="images/gifts-2.jpg" alt="Describe photo 2" loading="lazy" onerror="this.remove()">Photo here: gifts-2.jpg</figure>
-        <figure class="ph"><img src="images/gifts-3.jpg" alt="Describe photo 3" loading="lazy" onerror="this.remove()">Photo here: gifts-3.jpg</figure>
-        <figure class="ph"><img src="images/gifts-4.jpg" alt="Describe photo 4" loading="lazy" onerror="this.remove()">Photo here: gifts-4.jpg</figure>
-        <figure class="ph"><img src="images/gifts-5.jpg" alt="Describe photo 5" loading="lazy" onerror="this.remove()">Photo here: gifts-5.jpg</figure>
+        <figure class="ph"><img src="images/gifts-1.jpeg" alt="A wooden puzzle of a polar bear and cubs above blue painted waves with fish" loading="lazy" onerror="this.remove()">Photo here: gifts-1.jpeg</figure>
+        <figure class="ph"><img src="images/gifts-2.jpeg" alt="A wooden puzzle of a family of cats on a tray" loading="lazy" onerror="this.remove()">Photo here: gifts-2.jpeg</figure>
+        <figure class="ph"><img src="images/gifts-3.jpeg" alt="A wooden bear puzzle hugging a red heart" loading="lazy" onerror="this.remove()">Photo here: gifts-3.jpeg</figure>
+        <figure class="ph"><img src="images/gifts-4.jpeg" alt="A wooden triceratops puzzle painted in shades of green and blue" loading="lazy" onerror="this.remove()">Photo here: gifts-4.jpeg</figure>
+        <figure class="ph"><img src="images/gifts-5.jpeg" alt="Four hardwood bookmarks with cord ties and small star charms" loading="lazy" onerror="this.remove()">Photo here: gifts-5.jpeg</figure>
       </div>
     </div>
 
@@ -406,7 +404,7 @@ const MARKETS = [
   var ctrl = document.getElementById("slide-controls");
   var slides = [], i = 0, timer = null, paused = false;
   var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var DELAY = 6000; /* milliseconds each photo stays: 6000 = 6 seconds */
+  var DELAY = 3000; /* milliseconds each photo stays: 3000 = 3 seconds */
 
   function show(n) {
     slides[i].classList.remove("is-on");
